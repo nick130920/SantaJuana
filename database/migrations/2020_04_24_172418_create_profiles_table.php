@@ -10,6 +10,7 @@ class CreateProfilesTable extends Migration
      * Run the migrations.
      *
      * @return void
+
      */
     public function up(){
         Schema::create('profiles', function (Blueprint $table) {
@@ -24,11 +25,19 @@ class CreateProfilesTable extends Migration
           $table->date('birth');
           $table->enum('sex', ['woman', 'man', 'other']);
           $table->enum('user_type', ['teacher', 'student', 'parent', 'manager']);
-
-
+          $table->enum('status', ['active', 'inactive', 'locked', 'trash', 'processing']);
+          // Registro Secundario
+          $table->string('eps', 100)->nullable();
+          $table->enum('blood_type', ['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'])->nullable();
+          $table->enum('social_stratum', ['1', '2', '3', '4', '5', '6'])->nullable();
+          $table->enum('population',['Urban','Rural'])->nullable();
+          
           #clave foranea Usuario (fk)
           $table->unsignedBigInteger('user_id');
           $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+          #clave foranea imagen (fk)
+          $table->unsignedBigInteger('image_id');
+          $table->foreign('image_id')->references('id')->on('images')->onDelete("cascade")->onUpdate("cascade")->nullable();
 
           $table->timestamps();
         });
