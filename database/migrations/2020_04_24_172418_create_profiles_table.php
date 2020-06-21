@@ -16,7 +16,8 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->bigInteger('id_number')->unique();
-          $table->enum('id_type', ['RC', 'TI', 'CC', 'CE', 'PA','SI']);
+          //Clave foranea Adicionada de tipo de documento 
+          //$table->foreignId('id_type')->constrained();
           $table->string('first_name', 30);
           $table->string('second_name', 30);
           $table->string('first_surname', 30);
@@ -25,7 +26,7 @@ class CreateProfilesTable extends Migration
           $table->date('birth');
           $table->enum('sex', ['woman', 'man', 'other']);
           $table->enum('user_type', ['teacher', 'student', 'parent', 'manager']);
-          $table->enum('status', ['active', 'inactive', 'locked', 'trash', 'processing']);
+          //Clave foranea Adicionada de estado
           // Registro Secundario
           $table->string('eps', 100)->nullable();
           $table->enum('blood_type', ['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'])->nullable();
@@ -38,7 +39,6 @@ class CreateProfilesTable extends Migration
           #clave foranea imagen (fk)
           $table->unsignedBigInteger('image_id');
           $table->foreign('image_id')->references('id')->on('images')->onDelete("cascade")->onUpdate("cascade")->nullable();
-
           $table->timestamps();
         });
     }

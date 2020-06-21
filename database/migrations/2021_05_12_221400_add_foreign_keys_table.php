@@ -24,10 +24,16 @@ class AddForeignKeysTable extends Migration
             $table->foreign("working_day")->references('id')->on('working_days');  
             #clave foranea sede (fk)
             $table->unsignedBigInteger('campus_id');
-            $table->foreign("campus_id")->references('id')->on('campuses');    
-            #clave foranea director (fk)
-            $table->unsignedBigInteger('course_director');
-            $table->foreign('course_director')->references('id')->on('teachers');  
+            $table->foreign("campus_id")->references('id')->on('campuses'); 
+            #clave foranea estado (fk)
+            $table->foreignId('statuses')->constrained();
+
+        });
+        Schema::table('profiles', function (Blueprint $table){
+            #Clave foranea Tipo de Documento
+            $table->foreignId('id_type')->constrained();
+            #Clave foranea estado del perfil
+            $table->foreignId('statuses')->constrained();
         });
     }
 
@@ -44,6 +50,11 @@ class AddForeignKeysTable extends Migration
         Schema::table('groups', function (Blueprint $table) {
             $table->dropColumn('working_day');
             $table->dropColumn('campus_id');
+            $table->dropColumn('statuses');
+        });
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->dropColumn('id_type');
+            $table->dropColumn('statuses');
         });
     }
 }

@@ -22,9 +22,7 @@ class CreateStudentsTable extends Migration
             #clave foranea Usuario (fk)
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete("cascade")->onUpdate("cascade");
-            #clave foranea grupo (fk)
-            $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
+            
 
 
             $table->timestamps();

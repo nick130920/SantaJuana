@@ -22,8 +22,8 @@ class CreateGroupsTable extends Migration
             $table->foreign("grade_id")->references('id')->on('grades');    
 
             //llave Foranea Asignada hacia Jornada
-            //Llave foranea hacia las sedes adicionada
-            //Llave foranea director
+            //Llave foranea hacia las sedes adicionadas
+            //LLave foranea Estado adicionada
             $table->timestamps();
         });
     }

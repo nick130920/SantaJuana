@@ -15,6 +15,9 @@ class CreateWorkingDaysTable extends Migration
     {
         Schema::create('working_days', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('contraction');
+            $table->integer('weekly_hours');
             $table->timestamps();
         });
     }

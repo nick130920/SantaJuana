@@ -16,13 +16,14 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('teacher_id');//Codigo profesor verificación
-            $table->string('study_center');
-            $table->string('university_degrees');
-            $table->year('graduation_Year');
-            $table->string('grade_rank',2);
-            $table->date('date_of_appointment');
-            $table->integer('decree_of_appointment');
-            #clave foranea Usuario (fk)
+            $table->string('study_center');//centro de estudios
+            $table->string('university_degrees');//grado universitario
+            $table->year('graduation_Year');//año de graduación
+            $table->string('grade_rank',2);//escalafon
+            $table->date('date_of_appointment');//fecha de nombramiento
+            $table->integer('decree_of_appointment');//decreto de nombramiento
+
+            #clave foranea Perfil (fk)
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
